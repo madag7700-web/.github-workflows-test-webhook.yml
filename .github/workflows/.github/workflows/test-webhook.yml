@@ -1,0 +1,17 @@
+name: Test External PHP Webhook
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: POST JSON to ByetHost PHP
+        run: |
+          curl -i --fail-with-body \
+            -X POST \
+            "https://tes-node-js.html-5.me/webhook.php" \
+            -H "Content-Type: application/json" \
+            -d '{"test":true,"source":"github-actions","message":"EXTERNAL_SERVER_TEST"}'
