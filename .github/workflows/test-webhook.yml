@@ -1,0 +1,21 @@
+name: Test External PHP Webhook
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-webhook:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: POST JSON to ByetHost PHP
+        run: |
+          curl -4 -v \
+            --http1.1 \
+            --connect-timeout 20 \
+            --max-time 60 \
+            -X POST \
+            "https://tes-node-js.html-5.me/webhook.php" \
+            -H "Content-Type: application/json" \
+            -H "User-Agent: GitHubActions-Test/1.0" \
+            --data '{"test":true,"source":"github-actions","message":"EXTERNAL_SERVER_TEST"}'
